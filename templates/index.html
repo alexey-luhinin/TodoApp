@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	<title>TodoApp</title>
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1>TodoApp</h1>
+		<h4>What do you want to do:</h4>
+		<form method="POST">
+			<div class="form-group">
+				<input class="form-control" type="text" name="title" id="title">
+				<br>
+				<button type="submit" class="btn btn-secondary btn-lg btn-block">Add</button>
+			</div>
+		</form>
+		{% if todos %}
+			<hr>
+			<h4>Todos:</h4>
+			<ul class="list-group">
+				{% for todo in todos %}
+					<li class="list-group-item">
+						{{ todo.title }}
+						<a href="edit/{{ todo.id }}"><button class="btn btn-link">Edit</button></a>
+						<a href="del/{{ todo.id }}"><button class="btn btn-link">Delete</button></a>
+					</li>
+				{% endfor %}
+			</ul>
+		{% endif %}
+	</div>
+{% endblock %}
