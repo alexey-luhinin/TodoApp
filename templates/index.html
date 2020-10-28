@@ -21,9 +21,15 @@
 			<ul class="list-group">
 				{% for todo in todos %}
 					<li class="list-group-item">
-						{{ todo.title }}
+						{% if not todo.is_done %}
+							<button type="button" class="btn btn-secondary btn-sm" disabled>Not complete</button>
+						{% else %}
+							<button type="button" class="btn btn-primary btn-sm" disabled>Completed</button>
+						{% endif %}
+						<span class="item {% if todo.is_done %}complete{% endif %}">{{ todo.title }}</span>
 						<a href="edit/{{ todo.id }}"><button class="btn btn-link">Edit</button></a>
 						<a href="del/{{ todo.id }}"><button class="btn btn-link">Delete</button></a>
+						<a href="update/{{ todo.id }}"><button class="btn btn-link">Update</button></a>
 					</li>
 				{% endfor %}
 			</ul>

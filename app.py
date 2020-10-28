@@ -43,6 +43,15 @@ def edit(id):
         return redirect(url_for('index'))
     return render_template('edit.html', todo=todo)
 
+@app.route('/update/<int:id>', methods=['GET', 'POST'])
+def update(id):
+    todo = Todo.query.get(id)
+    status = todo.is_done
+    todo.is_done = not status
+    db.session.add(todo)
+    db.session.commit()
+    return redirect(url_for('index'))
+
 
 if __name__ == '__main__':
     app.run(debug=True)
