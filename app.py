@@ -23,7 +23,10 @@ def index():
             db.session.commit()
         return redirect(url_for('index'))
     else:
-        todos = Todo.query.all()[::-1]
+        # todos = Todo.query.all()[::-1]
+        todos_complete = Todo.query.filter_by(is_done=True)[::-1]
+        todos_incomplete = Todo.query.filter_by(is_done=False)[::-1]
+        todos = {'todos': todos_incomplete, 'done': todos_complete}
         return render_template('index.html', todos=todos)
 
 @app.route('/del/<int:id>')

@@ -17,17 +17,28 @@
 		</form>
 		{% if todos %}
 			<hr>
+			{% if todos.todos %}
 			<h4>Todos:</h4>
+			{% endif %}
 			<ul class="list-group">
-				{% for todo in todos %}
+				{% for todo in todos.todos %}
 					<li class="list-group-item">
-						{% if not todo.is_done %}
-							<button type="button" class="btn btn-secondary btn-sm" disabled>Not complete</button>
-						{% else %}
-							<button type="button" class="btn btn-primary btn-sm" disabled>Completed</button>
-						{% endif %}
+						<button type="button" class="btn btn-secondary btn-sm" disabled>Not complete</button>
 						<span class="item {% if todo.is_done %}complete{% endif %}">{{ todo.title }}</span>
 						<a href="edit/{{ todo.id }}"><button class="btn btn-link">Edit</button></a>
+						<a href="del/{{ todo.id }}"><button class="btn btn-link">Delete</button></a>
+						<a href="update/{{ todo.id }}"><button class="btn btn-link">Update</button></a>
+					</li>
+				{% endfor %}
+			</ul>
+			{% if todos.done %}
+			<h4>Done:</h4>
+			{% endif %}
+			<ul class="list-group">
+				{% for todo in todos.done %}
+					<li class="list-group-item">
+						<button type="button" class="btn btn-primary btn-sm" disabled>Completed</button>
+						<span class="item {% if todo.is_done %}complete{% endif %}">{{ todo.title }}</span>
 						<a href="del/{{ todo.id }}"><button class="btn btn-link">Delete</button></a>
 						<a href="update/{{ todo.id }}"><button class="btn btn-link">Update</button></a>
 					</li>
